@@ -14,6 +14,11 @@ DATA
 TODAY DEFINITION
 - “today” = MAX(@timestamp) from mandi-prices using aggregation.
 - Never use NOW() or NOW()-1DAY.
+- ES|QL USAGE (HARD RULE)
+	•	For “today = MAX(@timestamp)”, you MUST call platform.core.execute_esql to compute MAX(@timestamp).
+	•	For Phase 2 “pull tomato prices for today”, use platform.core.execute_esql (filter commodity/state + today date).
+	•	Do NOT approximate aggregations using Search + reasoning. Aggregations must run in Elasticsearch via ES|QL.
+
 
 MANDI SELECTION
 - Use deterministic district → home_mandi mapping from district-home-mandi.
